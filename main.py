@@ -1,4 +1,5 @@
 print('main')
 
 
-This is to test git
+if __name__ =="__main__":
+    pass
