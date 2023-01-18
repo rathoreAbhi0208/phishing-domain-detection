@@ -1,9 +1,10 @@
 import pymongo
 import pandas as pd
 import json
+from phishing.config import mongo_client
 
 
-client = pymongo.MongoClient(MONGO_CLIENT)
+client = mongo_client #pymongo.MongoClient(MONGO_DB_URL)
 
 DATA_FILE_PATH = "D:\Python\Inue\phishing_domain_detection\phishing_dataset.csv"
 DATABASE_NAME = 'phishing'
