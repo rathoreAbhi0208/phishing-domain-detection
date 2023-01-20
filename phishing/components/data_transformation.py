@@ -3,7 +3,7 @@ from phishing.exception import PhishingException
 from phishing.logger import logging
 from typing import Optional
 from phishing.config import TARGET_COLUMN
-from sklearn.preprocessing import Pipeline
+from sklearn.pipeline import Pipeline
 from imblearn.combine import SMOTETomek
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import RobustScaler
@@ -19,6 +19,7 @@ class DataTransformation:
                 data_ingestion_artifact:artifact_entity.DataIngestionArtifact):
 
         try:
+            logging.info(f"{'>>'*20} Data Transformation {'<<'*20}")
             self.data_transformation_config = data_transformation_config
             self.data_ingestion_artifact = data_ingestion_artifact
 
@@ -32,7 +33,7 @@ class DataTransformation:
             simple_imputer = SimpleImputer(strategy='mean',fill_value=0)
             robust_scaler = RobustScaler()
             
-            pipeline = Pipeline(step=[
+            pipeline = Pipeline(steps=[
                 ('Imputer',simple_imputer),
                 ('RobustScaler',robust_scaler)
             ])
@@ -87,11 +88,14 @@ class DataTransformation:
             utils.save_object(file_path=self.data_transformation_config.target_encoder_path,
             obj=label_encoder)
 
+            logging.info(f"before")
+
             data_transformation_artifact = artifact_entity.DataTransformationArtifact(
                 transform_object_path=self.data_transformation_config.transform_object_path,
                 transformed_train_path = self.data_transformation_config.transformed_train_path,
                 transformed_test_path = self.data_transformation_config.transformed_test_path,
                 target_encoder_path = self.data_transformation_config.target_encoder_path
+
             )
 
             logging.info(f"Data transformation object {data_transformation_artifact}")
