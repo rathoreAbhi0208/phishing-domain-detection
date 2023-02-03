@@ -70,7 +70,7 @@ def load_object(file_path:str,)  ->object:
             return dill.load(file_obj)
 
     except Exception as e:
-        raise PhishingException(e, sys) from e
+        raise PhishingException(e, sys) 
 
 
 def save_numpy_array_data(file_path:str,array:np.array):
