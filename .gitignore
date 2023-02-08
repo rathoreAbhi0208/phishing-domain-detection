@@ -9,6 +9,7 @@ artifact
 artifacts
 saved_models
 prediction
+abhi_credetials.csv
 
 # Distribution / packaging
 .Python
